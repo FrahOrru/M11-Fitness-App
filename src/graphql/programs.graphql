@@ -1,0 +1,14 @@
+query Programs {
+  programs {
+    id
+    image {
+      id
+      url
+    }
+    name
+    workouts {
+      id
+    }
+    description
+  }
+}
