@@ -2,6 +2,7 @@
 import React from 'react';
 import ProgressBar from '@/components/progress-bar/progress-bar';
 import { sdk } from '@/lib/client';
+import Link from 'next/link';
 
 export default async function ExerciseDetail({ params } : any ) {
   const { programId, workoutId, exerciseId } = params;
@@ -13,7 +14,9 @@ export default async function ExerciseDetail({ params } : any ) {
   return (
     <div className="exercise-screen">
       <div className="header">
-        <button className="backButton">&lt;</button>
+        <Link href={'../'}>
+          <button className="backButton">&lt;</button>
+        </Link>
       </div>
       <div className="videoContainer">
         <video className="video" muted autoPlay loop>

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import BottomBar from "@/components/bottom-bar/bottom-bar";
 import { UserProvider } from "@/context/clients";
+import GlobalErrorWrapper from "./global-error";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <GlobalErrorWrapper>
         <UserProvider>
           {children}
           <BottomBar></BottomBar>
         </UserProvider>
+        </GlobalErrorWrapper>
       </body>
     </html>
   );

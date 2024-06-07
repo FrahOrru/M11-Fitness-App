@@ -48,7 +48,6 @@ body {
 
 /* EXERCISE SCREEN*/
 
-/* components/ExerciseDetail.module.css */
 .exercise-screen {
   display: flex;
   flex-direction: column;
@@ -58,7 +57,7 @@ body {
   padding: 10px;
 }
 
-.exercise-screen .header {
+.header {
   display: flex;
   justify-content: flex-start;
   padding: 10px;
@@ -243,4 +242,75 @@ body {
 /* WORKOUT */
 
 .workout-page {
+}
+
+.exercises-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 1rem;
+  margin-bottom: 10vh;
+}
+
+.exercises-list a {
+  background-color: #1a1a1a;
+  padding: 1.5rem 1rem;
+  border-radius: 20px;
+}
+
+.information-card {
+  background-color: #1a1a1a;
+  border-radius: 20px;
+  padding: 20px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  max-width: 400px;
+  margin: 1rem;
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+.informations {
+  z-index: 1;
+}
+
+.informations h2 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.informations p {
+  font-size: 1.2rem;
+}
+
+.cta-button {
+  margin-top: 20px;
+}
+
+.cta-button button {
+  background-color: #fff;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.information-card::before {
+  content: "";
+  background: inherit;
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 20px;
 }

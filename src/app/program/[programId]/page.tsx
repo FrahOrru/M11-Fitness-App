@@ -17,9 +17,12 @@ export default async function ProgramDetail({ params } : any ) {
 
     return (
     <div className="program-page">
+        <div className="header">
+            <Link href={'../'}>
+            <button className="backButton">&lt;</button>
+            </Link>
+        </div> 
         <div className="program-header" style={styles}>
-            <Link href={"/"} className="back">&#8592;</Link>
- 
             <div className="veil"></div>
             <h2>{program?.name}</h2>
         </div>

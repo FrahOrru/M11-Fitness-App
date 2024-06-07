@@ -1,18 +1,22 @@
-import { ErrorBoundary } from 'react-error-boundary';
+"use client";
 
-const GlobalError = ({ error }: any) => {
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
+import { ReactNode } from 'react';
+
+const GlobalError = ({ error, resetErrorBoundary }: FallbackProps) => {
   return (
     <div>
       <h1>Global Error</h1>
       <p>{error.message}</p>
+      <button onClick={resetErrorBoundary}>Try again</button>
     </div>
   );
 };
 
-export default function App({ Component, pageProps }: any) {
-  return (
-    <ErrorBoundary FallbackComponent={GlobalError}>
-      <Component {...pageProps} />
-    </ErrorBoundary>
-  );
-}
+const GlobalErrorWrapper = ({ children }: { children: ReactNode }) => (
+  <ErrorBoundary FallbackComponent={GlobalError}>
+    {children}
+  </ErrorBoundary>
+);
+
+export default GlobalErrorWrapper;
