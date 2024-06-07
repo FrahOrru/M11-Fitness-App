@@ -11,7 +11,7 @@ const StepsCard = () => {
         <h1><span>200</span> Step</h1>
         <button className="button">Join Challenge</button>
       <div className="image">
-        <Image src="/ex4.png" alt="exercise" width={300} height={100} />
+        <Image loading='eager' src="/ex4.png" alt="exercise" width={300} height={100} />
       </div>
       </div>
     </div>

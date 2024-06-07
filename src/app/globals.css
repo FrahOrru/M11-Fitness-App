@@ -149,3 +149,98 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
+
+/* PROGRAM */
+
+.program-page .workouts-list {
+  display: flex;
+  /* gap: 1rem; */
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 2rem 0;
+}
+
+.program-page .program-header {
+  height: 20vh;
+  display: flex;
+  align-items: flex-end;
+
+  position: relative;
+}
+
+.program-page .program-header .veil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #0a0a0a6d;
+
+  height: 20vh;
+  width: 100%;
+
+  z-index: 0;
+}
+
+.program-page .program-header h2 {
+  z-index: 1;
+  font-size: 25px;
+  font-weight: 600;
+
+  padding: 0 2rem;
+}
+.days-work .day-item {
+  padding: 1rem;
+  background-color: #3b3a3a;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  font-style: italic;
+}
+.program-page .program-header a {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  font-size: 25px;
+  z-index: 1;
+  font-weight: 900;
+}
+
+.program-page .description {
+  margin: 1rem;
+  background: #1a1a1a;
+  padding: 1rem;
+  border-radius: 0.4rem;
+}
+
+/*LOADER*/
+.loader {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto;
+  position: relative;
+  background: #fff;
+  box-shadow: -24px 0 #fff, 24px 0 #fff;
+  box-sizing: border-box;
+  animation: shadowPulse 2s linear infinite;
+}
+
+@keyframes shadowPulse {
+  33% {
+    background: #fff;
+    box-shadow: -24px 0 #ff6b00, 24px 0 #fff;
+  }
+  66% {
+    background: #ff6b00;
+    box-shadow: -24px 0 #fff, 24px 0 #fff;
+  }
+  100% {
+    background: #fff;
+    box-shadow: -24px 0 #fff, 24px 0 #ff6b00;
+  }
+}
+
+/* WORKOUT */
+
+.workout-page {
+}

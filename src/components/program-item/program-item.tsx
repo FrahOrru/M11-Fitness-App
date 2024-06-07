@@ -11,7 +11,7 @@ const ProgramItem: React.FC<PostItemLgProps> = ({ program }) =>{
   return (
     <div className="program-item">
       <div className="imageContainer">
-        <Image src={program.image.url} alt="Push Up" width={100} height={100} />
+        <Image loading='eager' src={program.image.url} alt="Push Up" width={100} height={100} />
       </div>
       <div className="content">
         <h3>{program.name}</h3>

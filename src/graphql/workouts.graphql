@@ -1,16 +1,16 @@
 query Workouts {
   workouts {
+    name
+    day
     description
     id
-    name
+    image {
+      url
+    }
     exercises {
       id
       name
       repetition
-    }
-    image {
-      id
-      url
     }
   }
 }

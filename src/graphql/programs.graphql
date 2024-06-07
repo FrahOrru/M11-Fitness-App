@@ -7,7 +7,14 @@ query Programs {
     }
     name
     workouts {
+      description
       id
+      image {
+        id
+        url
+      }
+      name
+      day
     }
     description
   }

@@ -1,9 +1,14 @@
 "use client";
 import React from 'react';
 import ProgressBar from '@/components/progress-bar/progress-bar';
+import { sdk } from '@/lib/client';
 
-export default function ExerciseDetail({ params } : any ) {
+export default async function ExerciseDetail({ params } : any ) {
   const { programId, workoutId, exerciseId } = params;
+
+  const exercises = await sdk.Exercises();
+
+  const exercise = exercises.data.exercises.find((exe) => exe.id === exerciseId)
 
   return (
     <div className="exercise-screen">
@@ -11,16 +16,16 @@ export default function ExerciseDetail({ params } : any ) {
         <button className="backButton">&lt;</button>
       </div>
       <div className="videoContainer">
-        <video className="video" controls>
-          <source src="/videos/workout.mp4" type="video/mp4" />
+        <video className="video" muted autoPlay loop>
+          <source src={exercise?.video?.url} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div className="overlay">
-          <div className="timer">10</div>
+          <div className="timer">{exercise?.repetition}</div>
         </div>
       </div>
       <div className="progressContainer">
-        <ProgressBar duration={30} />
+        <ProgressBar duration={exercise?.repetition} />
         <div className="exercise">Explosive neg. Push Ups {programId + ' ' + workoutId + ' ' + exerciseId} </div>
       </div>
       <div className="controls">
