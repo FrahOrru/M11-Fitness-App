@@ -1,0 +1,15 @@
+query Exercises {
+  exercises {
+    id
+    description
+    image {
+      id
+      url
+    }
+    name
+    video {
+      url
+      id
+    }
+  }
+}

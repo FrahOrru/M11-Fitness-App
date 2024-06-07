@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: center;
+  overflow: hidden;
 }
 
 .card .text {
@@ -36,8 +37,8 @@
 
 .card .image {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: -10%;
+  right: -50%;
 }
 
 .card .image img {

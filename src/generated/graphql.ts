@@ -5267,12 +5267,39 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type ExercisesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ExercisesQuery = { __typename?: 'Query', exercises: Array<{ __typename?: 'Exercise', id: string, description?: string | null, name?: string | null, image?: { __typename?: 'Asset', id: string, url: string } | null, video?: { __typename?: 'Asset', url: string, id: string } | null }> };
+
 export type ProgramsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ProgramsQuery = { __typename?: 'Query', programs: Array<{ __typename?: 'Program', id: string, name?: string | null, description?: string | null, image?: { __typename?: 'Asset', id: string, url: string } | null, workouts: Array<{ __typename?: 'Workout', id: string }> }> };
 
+export type WorkoutsQueryVariables = Exact<{ [key: string]: never; }>;
 
+
+export type WorkoutsQuery = { __typename?: 'Query', workouts: Array<{ __typename?: 'Workout', description?: string | null, id: string, name?: string | null, exercises: Array<{ __typename?: 'Exercise', id: string, name?: string | null, repetition?: number | null }>, image?: { __typename?: 'Asset', id: string, url: string } | null }> };
+
+
+export const ExercisesDocument = gql`
+    query Exercises {
+  exercises {
+    id
+    description
+    image {
+      id
+      url
+    }
+    name
+    video {
+      url
+      id
+    }
+  }
+}
+    `;
 export const ProgramsDocument = gql`
     query Programs {
   programs {
@@ -5289,16 +5316,42 @@ export const ProgramsDocument = gql`
   }
 }
     `;
+export const WorkoutsDocument = gql`
+    query Workouts {
+  workouts {
+    description
+    id
+    name
+    exercises {
+      id
+      name
+      repetition
+    }
+    image {
+      id
+      url
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
 
 const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
+const ExercisesDocumentString = print(ExercisesDocument);
 const ProgramsDocumentString = print(ProgramsDocument);
+const WorkoutsDocumentString = print(WorkoutsDocument);
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    Exercises(variables?: ExercisesQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: ExercisesQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<ExercisesQuery>(ExercisesDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Exercises', 'query', variables);
+    },
     Programs(variables?: ProgramsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: ProgramsQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
         return withWrapper((wrappedRequestHeaders) => client.rawRequest<ProgramsQuery>(ProgramsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Programs', 'query', variables);
+    },
+    Workouts(variables?: WorkoutsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<{ data: WorkoutsQuery; errors?: GraphQLError[]; extensions?: any; headers: Headers; status: number; }> {
+        return withWrapper((wrappedRequestHeaders) => client.rawRequest<WorkoutsQuery>(WorkoutsDocumentString, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'Workouts', 'query', variables);
     }
   };
 }

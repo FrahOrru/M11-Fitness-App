@@ -1,0 +1,38 @@
+/* components/ExerciseCard.module.css */
+.program-item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+
+  background-color: #333;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  max-width: 400px;
+  padding: 1rem 0;
+}
+
+.program-item .imageContainer {
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.program-item .imageContainer img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.program-item .content h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.program-item .content p {
+  margin: 0;
+  font-size: 14px;
+  color: #bbb;
+}

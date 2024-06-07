@@ -1,0 +1,16 @@
+query Workouts {
+  workouts {
+    description
+    id
+    name
+    exercises {
+      id
+      name
+      repetition
+    }
+    image {
+      id
+      url
+    }
+  }
+}
