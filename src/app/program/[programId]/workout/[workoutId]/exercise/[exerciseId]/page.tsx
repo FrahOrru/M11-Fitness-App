@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import ProgressBar from '@/components/progress-bar/progress-bar';
 import { sdk } from '@/lib/client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface Asset {
   __typename?: "Asset";
@@ -21,6 +22,12 @@ interface Exercise {
   video?: Asset | null;
 }
 
+interface Workout {
+  __typename?: "Workout";
+  id: string;
+  exercises: Exercise[];
+}
+
 interface ExerciseDetailProps {
   params: {
     programId: string;
@@ -31,6 +38,7 @@ interface ExerciseDetailProps {
 
 export default function ExerciseDetail({ params }: ExerciseDetailProps) {
   const { programId, workoutId, exerciseId } = params;
+  const router = useRouter();
 
   const [exercise, setExercise] = useState<Exercise | null>(null);
   const [countdown, setCountdown] = useState<number | null>(null);
@@ -58,10 +66,32 @@ export default function ExerciseDetail({ params }: ExerciseDetailProps) {
       timer = setInterval(() => {
         setCountdown((prevCountdown) => (prevCountdown !== null ? prevCountdown - 1 : 0));
       }, 1000);
+    } else if (countdown === 0) {
+      fetchNextExercise();
     }
 
     return () => clearInterval(timer);
   }, [countdown]);
+
+  const fetchNextExercise = async () => {
+    try {
+      const workoutResponse = await sdk.Workouts();
+      const currentWorkout = workoutResponse.data.workouts.find((workout: Workout) => workout.id === workoutId);
+
+      if (currentWorkout) {
+        const currentExerciseIndex = currentWorkout.exercises.findIndex((exe: Exercise) => exe.id === exerciseId);
+        const nextExercise = currentWorkout.exercises[currentExerciseIndex + 1];
+
+        if (nextExercise) {
+          router.push(`/program/${programId}/workout/${workoutId}/exercise/${nextExercise.id}`);
+        } else {
+          console.log("Workout complete!");
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching workout or navigating to the next exercise:", error);
+    }
+  };
 
   if (loading) {
     return (
@@ -74,7 +104,7 @@ export default function ExerciseDetail({ params }: ExerciseDetailProps) {
   return (
     <div className="exercise-screen">
       <div className="header">
-        <Link href={'../'}>
+        <Link href={`../`}>
           <button className="backButton">&lt;</button>
         </Link>
       </div>
@@ -94,12 +124,8 @@ export default function ExerciseDetail({ params }: ExerciseDetailProps) {
       <div className="progressContainer">
         <ProgressBar duration={exercise?.repetition || 0} />
         <div className="exercise">
-          Explosive neg. Push Ups {programId + ' ' + workoutId + ' ' + exerciseId}
+          {exercise?.name}
         </div>
-      </div>
-      <div className="controls">
-        <button className="prevButton">Previous</button>
-        <button className="nextButton">Next</button>
       </div>
       <div className="footer">
         <button className="seeAllButton">See all</button>
