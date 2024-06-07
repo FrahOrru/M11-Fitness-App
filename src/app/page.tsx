@@ -2,6 +2,7 @@ import ProgramItem from "@/components/program-item/program-item";
 import StepsCard from "@/components/steps-card/steps-card";
 import { sdk } from "@/lib/client";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
   const programs = await sdk.Programs();
@@ -21,7 +22,9 @@ export default async function Home() {
       <div className="programs-list">
         <h2>All Programs for your health</h2>
         {programs.data.programs.map((program) => {
-          return <ProgramItem key={program.id} program={program}></ProgramItem>
+          return <Link key={program.id} href={"/program/" + program.id}>
+          <ProgramItem program={program}></ProgramItem>
+          </Link>
         })}
       </div>
     </div>
